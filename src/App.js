@@ -1,22 +1,27 @@
 import './App.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import Header from './components/Header';
+import Menu from './components/Menu';
+import Home from './components/Home';
+
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 function App() {
+
+
   return (
+    <Router>
     <div className="App">
-      <header className="App-header">
-        <p>New App</p>
-      </header>
-      <div className="App-menu">
-        <ul>Home</ul>
-        <ul>Tasks</ul>
-      </div>
-      <div className="App-content">
-        <p>Content</p>
-      </div>
-      <footer className="App-footer">
-        <p>Footer</p>
-      </footer>
+
+      <Header title={'My New App'}/>
+      
+      <Menu />
+      
+      <Home title={'My Home'}/>
     </div>
+    </Router>
   );
 }
 
