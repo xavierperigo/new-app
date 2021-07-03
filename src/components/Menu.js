@@ -4,8 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import List from '@material-ui/core/List';
-
-import { link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -50,10 +49,9 @@ const Menu = () => {
           <Divider />
           <List>
             {['Home', 'Tasks'].map((text, index) => (
-              <ListItem button key={text}>
+              <ListItem button component={Link} to={`/${text}`} key={text}>
                     <ListItemText primary={text} />
               </ListItem>
-              
             ))}
           </List>
         </Drawer>

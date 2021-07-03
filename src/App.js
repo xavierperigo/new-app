@@ -1,19 +1,17 @@
 import './App.css';
 import React from 'react';
-import ReactDOM from 'react-dom';
-
+//import ReactDOM from 'react-dom';
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Menu from './components/Menu';
 import Home from './components/Home';
 import Tasks from './components/Tasks';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-
 function App() {
-  const [tasks, setTasks] = useState([]
-  )
+  const [showTask, setShowTask] = useState(false)
+  const [tasks, setTasks] = useState([])
 
   useEffect(() => {
     const getTasks = async () => {
@@ -34,15 +32,33 @@ function App() {
 
   return (
     <Router>
-    <div className="App">
+      <div className="App">
 
-      <Header title={'My New App'}/>
+        <Header 
+          title={'My New App'}
+        />
 
-      <Menu />
-      
-      <Home title={'My Home'}/>
-      <Tasks tasks={tasks}/>
-    </div>
+        <Menu />
+
+        <Redirect from='/' to='/home'/>
+        <Route        
+          path='/home'
+          exact
+          render={(props) => (
+          <>
+            <Home />
+          </>)}
+        /> 
+
+        <Route
+          path='/tasks'
+          render={(props) => (
+            <>
+              {tasks.length > 0 ? (<Tasks tasks={tasks}/>) : ('No Tasks To Show')}
+            </>
+          )}
+        />
+      </div>
     </Router>
   );
 }
