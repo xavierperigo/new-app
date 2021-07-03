@@ -2,24 +2,53 @@ import './App.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { useState, useEffect } from 'react';
+
 import Header from './components/Header';
 import Menu from './components/Menu';
 import Home from './components/Home';
+import Tasks from './components/Tasks';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 function App() {
+  const [tasks, setTasks] = useState(
+    [
+        {"id":0,"text":"Task","completed":false},
+        {"id":1,"text":"Task 1","completed":true},
+        {"id":2,"text":"Task 2","completed":false},
+        {"id":3,"text":"Task 3","completed":false},
+        {"id":4,"text":"Task 4","completed":true},
+        {"id":5,"text":"Task 5","completed":true}
+    ]
+  )
 
+  useEffect(() => {
+    const getTasks = async () => {
+      const tasksFromServer = await fetchTasks()
+      console.log(tasksFromServer)
+    }
+
+    getTasks()
+  }, [])
+
+  const fetchTasks = async () => {
+    const res = await fetch('http://localhost:3008/api/tasks')
+    const data = await res.json()
+
+    return data;
+  }
 
   return (
     <Router>
     <div className="App">
 
       <Header title={'My New App'}/>
-      
+
       <Menu />
       
       <Home title={'My Home'}/>
+      <Tasks tasks={tasks}/>
     </div>
     </Router>
   );
