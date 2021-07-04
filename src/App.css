@@ -28,8 +28,9 @@
   color: #61dafb;
 }
 
-.App-menu {
-  color: #61dafb;
+.task.completed {
+  border-left: 5px solid green;
+  text-decoration: line-through;
 }
 
 @keyframes App-logo-spin {

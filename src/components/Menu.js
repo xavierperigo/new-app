@@ -32,31 +32,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Menu = () => {
-    const classes = useStyles();
+const Menu = ({ onRefresh }) => {
+  const classes = useStyles();
 
-    return (
-        <div className="App-menu">
-        <Drawer
-          className={classes.drawer}
-          variant="permanent"
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          anchor="left"
-        >
-          <div className={classes.toolbar} />
-          <Divider />
-          <List>
-            {['Home', 'Tasks'].map((text, index) => (
-              <ListItem button component={Link} to={`/${text}`} key={text}>
-                    <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-        </Drawer>
-        </div>
-    )
+  return (
+    <div className="App-menu">
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        anchor="left"
+      >
+        <div className={classes.toolbar} />
+        <Divider />
+        <List>
+          {['Home', 'Tasks'].map((text, index) => (
+            <ListItem button component={Link} to={`/${text}`} key={text} onClick={onRefresh}>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+
+      </Drawer>
+    </div>
+  )
 }
 
 export default Menu
